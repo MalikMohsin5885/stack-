@@ -48,9 +48,20 @@ void postfixEvaluation(char (&Equation)[50] , int total)
 			
 			case '-' :
 			{
-				int operand_2 = Pop();
-				int operand_1 = Pop();
-				Push(operand_1 - operand_2);
+				cout<<"enter"<<endl;
+				if(isdigit(Equation[currentIndex+1]))
+				{
+					int number = (Equation[currentIndex+1] - '0') * -1;
+					Push(number);
+					currentIndex++;
+				}
+				else
+				{
+					cout<<"enter2"<<endl;
+					int operand_2 = Pop();
+					int operand_1 = Pop();
+					Push(operand_1 - operand_2);
+				}
 			}
 				break;
 			
@@ -74,7 +85,7 @@ void postfixEvaluation(char (&Equation)[50] , int total)
 			{
 				int operand_2 = Pop();
 				int operand_1 = Pop();
-				Push(operand_1 / operand_2);
+				Push(operand_1 % operand_2);
 			}
 				break;
 			case ' ' :
@@ -98,6 +109,11 @@ void postfixEvaluation(char (&Equation)[50] , int total)
 			}
 				break;
 		}
+		
+		cout<<endl;
+		for(int pr = 0 ; pr <=myStack.Top ; pr++)
+			cout<<myStack.Array[pr]<<" , ";
+		cout<<endl;
 	}
 	
 }
@@ -112,6 +128,5 @@ int main()
 	cin.getline(Equation , 50);
 	
 	postfixEvaluation(Equation,strlen(Equation));
-	cout<<"top	"<<myStack.Top<<endl;
-	cout<<"result	"<<myStack.Array[myStack.Top];
+	cout<<"Evaluation:	"<<myStack.Array[myStack.Top];
 }
