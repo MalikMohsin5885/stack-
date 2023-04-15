@@ -76,19 +76,6 @@ void postfixEvaluation(char (&Equation)[50] , int total)
 				cout<<"Pushed	"<<Equation[currentIndex]<<endl;
 			}
 				break;
-//			default:
-//			{
-//			    int operand = 0;
-//			    int j = 0;
-//			    while (isdigit(Equation[currentIndex + j]))
-//			    {
-//			        operand = operand * 10 + (Equation[currentIndex + j] - '0');
-//			        j++;
-//			    }
-//			    currentIndex += j - 1;
-//			    Push(operand);
-//			}
-//			break;
 
 		}
 	}
