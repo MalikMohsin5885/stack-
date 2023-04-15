@@ -1,5 +1,6 @@
 #include<iostream>
 #include <cstring>
+#include <cmath>
 using namespace std;
 
 struct Stack
@@ -10,6 +11,7 @@ struct Stack
 
 void Push(int value)
 {
+	cout<<"to be pushed=>	"<<value<<endl;
 	if(myStack.Top == (sizeof(myStack.Array)/sizeof(char)))
 		cout<<"Stack Overflow"<<endl;
 	else
@@ -19,7 +21,7 @@ void Push(int value)
 	}
 }
 
-char Pop()
+int Pop()
 {
 	int temp = 0;
 	if(myStack.Top == -1)
@@ -30,6 +32,7 @@ char Pop()
 		myStack.Array[myStack.Top] = 0;
 		myStack.Top--;
 	}
+	cout<<"temp--------------------"<<temp<<endl;
 	return temp;
 }
 void postfixEvaluation(char (&Equation)[50] , int total)
@@ -40,9 +43,16 @@ void postfixEvaluation(char (&Equation)[50] , int total)
 		{
 			case '+' :
 			{
+				cout<<"top	"<<myStack.Top<<endl;
+				cout<<"2nd lst		"<<myStack.Array[myStack.Top-1]<<"			lst		"<<myStack.Array[myStack.Top]<<endl;
+//				int operand_2 = myStack.Array[myStack.Top];
+//				int operand_1 = myStack.Array[myStack.Top-1];
+//				Pop();
+//				Pop();
 				int operand_2 = Pop();
 				int operand_1 = Pop();
 				Push(operand_1 + operand_2);
+				
 			}
 				break;
 			
@@ -88,6 +98,18 @@ void postfixEvaluation(char (&Equation)[50] , int total)
 				Push(operand_1 % operand_2);
 			}
 				break;
+			case '^' :
+			{
+				int operand_2 = Pop();
+				int operand_1 = Pop();
+				Push(pow(operand_1,operand_2));
+			}
+				break;
+			case '#' :
+			{
+				//ignore spaces
+			}
+				break;
 			case ' ' :
 			{
 				//ignore spaces
@@ -128,5 +150,6 @@ int main()
 	cin.getline(Equation , 50);
 	
 	postfixEvaluation(Equation,strlen(Equation));
+	cout<<"top	"<<myStack.Top<<endl;
 	cout<<"Evaluation:	"<<myStack.Array[myStack.Top];
 }
